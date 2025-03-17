@@ -2,9 +2,21 @@ using UnityEngine;
 
 public class GameBoostrapper : MonoBehaviour
 {
+    private static GameBoostrapper _instance;
+
     private void Awake()
     {
-        var container = new DIContainer();
-        var game = new Game(container, this);
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject); 
+
+            var container = new DIContainer();
+            var game = new Game(container, this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 }

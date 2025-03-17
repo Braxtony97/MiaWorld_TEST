@@ -16,6 +16,7 @@ public class UnityLoadLevelService : ILoadLevelService
     {
         if (SceneManager.GetActiveScene().name != scene.ToString())
         {
+            SceneContext.DIContainer = _container;
             _coroutineService.StartCoroutine(LoadSceneCoroutine(scene));
         }
     }
